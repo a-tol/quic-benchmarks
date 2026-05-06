@@ -9,3 +9,7 @@ analysis_data/
 data*/
 graphs*/
 local/
+boringssl/
+environment/
+package-lock.json
+boring_build.sh

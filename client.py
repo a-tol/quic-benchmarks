@@ -179,6 +179,10 @@ def run_subprocess(client: str, url: str, dirpath: str, i: int, log: bool) -> di
     if client not in LOCAL_CONFIG:
         raise Exception('client {} is not valid'.format(client))
 
+    #make qlog directory for curl h3
+    os.environ['QLOGDIR'] = str(TMP_QLOG)
+    ENV = os.environ.copy()
+
     # Modify commands
     commands = []
     for command in LOCAL_CONFIG[client]:
@@ -202,7 +206,9 @@ def run_subprocess(client: str, url: str, dirpath: str, i: int, log: bool) -> di
         process = record_pcap(url_host)
         # pass
 
+    
     start = datetime.datetime.now()
+    print(commands)
     output = subprocess.run(
         commands,
         capture_output=True,
@@ -246,12 +252,13 @@ def run_subprocess(client: str, url: str, dirpath: str, i: int, log: bool) -> di
         return result
 
     if len(os.listdir(TMP_QLOG)) == 0:
+        print('qlog')
         raise 'no qlog created'
 
     oldpath = Path.joinpath(TMP_QLOG, os.listdir(TMP_QLOG)[0])
-
     try:
         result = process_qlog(oldpath)
+        #print('processed qlog')
 
         if dirpath is not None:
             with open(oldpath, mode='r') as old:
@@ -263,7 +270,8 @@ def run_subprocess(client: str, url: str, dirpath: str, i: int, log: bool) -> di
         remove_files(TMP_QLOG)
         return result
     except Exception as e:
-        remove_files(TMP_QLOG)
+        print('qlog except')
+        #remove_files(TMP_QLOG)
         raise e
 
 
@@ -373,10 +381,38 @@ def run_docker(client: str, url: str, dirpath: str, i: int) -> float:
 
 
 def process_qlog(qlog: str) -> dict:
+    
     with open(qlog, mode='r') as f:
-        data = json.load(f)
-        traces = data['traces'][0]
-        events = traces['events']
+        print("procees qlog")
+        print(type(f))
+        out = f.read()
+        print("read qlog")
+        #remove content separator
+        fixed = out.replace('', '')
+        # print('filter qlog')
+        # print("##########################################-------")
+        # print(fixed)
+        lines = fixed.split("\n")
+        # lines = list(map(lambda s: "[" + s[1: len(s)-1] + "]", lines))
+        lines.pop(0)
+        lines.pop(len(lines)-1)
+        # for l in lines:
+        #     print(l)
+        #     print('------------')
+        #remove the last character from the last string
+        fixed = ','.join(lines);
+
+        fixed = '{' + '\"traces\": [' + fixed + ']' + '}'
+        # print(fixed)
+        # formatted = '{' + ',\n'.join(lines) + '}'
+        # print("#############################################+++++")
+        data = json.loads(fixed)
+        # print(data)
+        #print("FUCK")
+        print(fixed)
+        traces = data['traces']
+        events = traces
+        #print("FUCK!")
         if 'configuration' in traces:
             time_units = traces['configuration']['time_units']
         else:
@@ -390,27 +426,30 @@ def process_qlog(qlog: str) -> dict:
         init_cwnd_mss = 0
         init_cwnd_bytes = 0
 
+        #print("FUCK!!")
         for event in events:
             if not event:
                 continue
 
-            if time_units == 'ms':
-                ts = int(event[0])
-            elif time_units == 'us':
-                ts = int(event[0]) / 1000
-            else:
-                ts = int(event[0]) / 1000
+            print(event)
+            # if time_units == 'ms':
+            #     ts = int(event[0])
+            # elif time_units == 'us':
+            #     ts = int(event[0]) / 1000
+            # else:
+            ts = int(event['time']) / 1000
+            event_type = event['name']
+            #print('FAHHHHHHHHH')
+            event_data = event['data']
+            #print("FUCK!!!!")
 
-            event_type = event[2]
-            event_data = event[3]
-
-            if event_type.lower() == 'packet_sent' and start is None:
+            if 'transport:packet_sent' in event_type.lower() and start is None:
                 start = ts
 
             if start is None:
                 continue
 
-            if event_type.lower() == 'packet_received':
+            if 'transport:packet_received' in event_type.lower():
                 if init_rtt is None:
                     init_rtt = ts - start
 
@@ -420,9 +459,11 @@ def process_qlog(qlog: str) -> dict:
                     continue
 
                 frames = event_data['frames']
+                print("FUCK!!!!!!!!")
 
                 for frame in frames:
                     if frame['frame_type'].lower() == 'stream':
+                        print("rat pack FAHHHH")
                         if frame['stream_id'] != '0':
                             continue
 
@@ -519,6 +560,7 @@ def main():
         dirpath = Path(args.dir)
     else:
         raise 'dir is not defined'
+
 
     clients = CONFIG['clients']
     random.shuffle(clients)

@@ -18,9 +18,9 @@
     "domains": {
         "description": "Domains to benchmark which are found in `endpoints.json`",
         "value": [
-            "google",
-            "facebook",
-            "cloudflare"
+            "quicly-reno",
+            "quicly-cubic",
+            "quicly-pico"
         ]
     },
     "sizes": {
@@ -30,16 +30,10 @@
             "5MB"
         ],
         "multi": [
-            "small",
-            "medium",
-            "large"
+
         ]
     },
     "clients": [
-        "curl_h2",
-        "chrome_h2",
-        "chrome_h3",
-        "proxygen_h3",
-        "ngtcp2_h3"
+        "curl_h3"
     ]
 }

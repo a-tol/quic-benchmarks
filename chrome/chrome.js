@@ -640,6 +640,7 @@ const runBenchmarkWeb = async (urlObj, dirs, isH3, log) => {
     });
 };
 
+//this is the entrypoint.
 (async () => {
     const parser = new argparse.ArgumentParser();
 
@@ -654,17 +655,30 @@ const runBenchmarkWeb = async (urlObj, dirs, isH3, log) => {
         log
     } = cliArgs;
 
+    //see config.json. this gets the client list
+    //for now this just uses the chrome clients
+    //and the single sizes.
+
     const clients = CONFIG.clients.filter(client => client.includes("chrome"));
     const sizes = multi ? MULTI_SIZES : SINGLE_SIZES;
 
+    //see config.json
+    //this goes over which domains to query
+    //and what sizes to check for.
+
     for (const domain of DOMAINS) {
         for (const size of sizes) {
+
+            //cross-references endpoints.json to ensure that the endpoint with the size
+            //is actually hosted
             if (!(size in ENDPOINTS[domain])) {
                 continue;
             }
 
             const urlObj = ENDPOINTS[domain][size];
 
+            //creates the directories that will
+            //hold the metrics and retrieved images 
             const dirs = {};
             Object.entries(DIRS).forEach(([key, value]) => {
                 dirs[key] = Path.join(value, dir, domain, size);
@@ -679,12 +693,15 @@ const runBenchmarkWeb = async (urlObj, dirs, isH3, log) => {
 
             console.log(`${domain}/${size}`);
 
+            //invokes the benchmark
             for (const client of clients) {
                 const isH3 = client == 'chrome_h3'
                 if (multi) {
+                    //multi-object tests
                     console.log(`Chrome: ${isH3 ? 'H3' : 'H2'} - multi object`);
                     await runBenchmarkWeb(urlObj, dirs, isH3, log);
                 } else {
+                    //single object tests
                     console.log(`Chrome: ${isH3 ? 'H3' : 'H2'} - single object`);
                     await runBenchmark(urlObj, dirs, isH3, log);
                 }
