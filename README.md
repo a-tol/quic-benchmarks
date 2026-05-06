@@ -1,5 +1,16 @@
 # QUIC Benchmarks
 
+Credit to https://github.com/triplewy/quic-benchmarks
+for the original benchmark code.
+
+use python3 -m venv [environment_directory] and place all the files
+from this repository there, then install all the requierd dependencies.
+
+Follow the same steps as listed below to run the benchmark,
+install http3-curl from https:github.com/stunnel/static-curl
+and set the path to the client path in clients.json
+to wherever the curl binary is placed.
+
 This repository is a set of tools to benchmark, compare, and analyze QUIC and TCP performance of production endpoints. So far, we have used this tool on endpoints from **Google**, **Facebook**, and **Cloudflare** which are detailed in `endpoints.json`.
 
 The general workflow for our benchmark comprises of the below steps:
