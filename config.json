@@ -18,9 +18,12 @@
     "domains": {
         "description": "Domains to benchmark which are found in `endpoints.json`",
         "value": [
+            "lsquic-adaptive",
+            "lsquic-bbr",
+            "lsquic-cubic",
             "quicly-reno",
-            "quicly-cubic",
-            "quicly-pico"
+            "quicly-pico",
+            "quicly-cubic"
         ]
     },
     "sizes": {

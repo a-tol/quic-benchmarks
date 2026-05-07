@@ -27,7 +27,7 @@ NETWORK_CONDITIONS=(
 for network in "${NETWORK_CONDITIONS[@]}"; do
     echo "$network"
     $BASEDIR/network/"$network".sh
-    runuser -l ayu9 -c "$BASEDIR/run_benchmark.sh $network"
+    runuser -l angelo -c "$BASEDIR/run_benchmark.sh $network"
 done
 
 # Analysis

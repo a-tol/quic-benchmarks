@@ -472,6 +472,7 @@ def process_qlog(qlog: str) -> dict:
                         if first_data_pkt_ts is None:
                             first_data_pkt_ts = ts
 
+                        #implies that a packet sent earlier arrived later
                         if ts <= first_data_pkt_ts + init_rtt:
                             init_cwnd_mss += 1
                             init_cwnd_bytes += length

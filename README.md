@@ -11,6 +11,12 @@ install http3-curl from https:github.com/stunnel/static-curl
 and set the path to the client path in clients.json
 to wherever the curl binary is placed.
 
+./run_benchmarks.sh runs with various network enshittification conditions.
+Please ensure that the name of the network device sepcified in each file matches the one
+on your local PC, specifically the network device which you are using for network connections.
+
+
+
 This repository is a set of tools to benchmark, compare, and analyze QUIC and TCP performance of production endpoints. So far, we have used this tool on endpoints from **Google**, **Facebook**, and **Cloudflare** which are detailed in `endpoints.json`.
 
 The general workflow for our benchmark comprises of the below steps:
