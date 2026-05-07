@@ -1,0 +1,2 @@
+1) tests were done on an hp fd0127dx laptop
+2) tests were done on angelo tolentino's home network
