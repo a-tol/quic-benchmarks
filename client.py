@@ -409,7 +409,6 @@ def process_qlog(qlog: str) -> dict:
         data = json.loads(fixed)
         # print(data)
         #print("FUCK")
-        print(fixed)
         traces = data['traces']
         events = traces
         #print("FUCK!")
@@ -459,7 +458,6 @@ def process_qlog(qlog: str) -> dict:
                     continue
 
                 frames = event_data['frames']
-                print("FUCK!!!!!!!!")
 
                 for frame in frames:
                     if frame['frame_type'].lower() == 'stream':
