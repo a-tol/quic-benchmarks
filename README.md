@@ -12,10 +12,9 @@ If it is different, please run
 sed -i 's/wlp2s0/[device_name]/g' *
 where your network device name is specified in [device_name].
 
-Follow the same steps as listed below to run the benchmark,
-install http3-curl from https:github.com/stunnel/static-curl
-and set the path to the client path in clients.json
-to wherever the curl binary is placed.
+Follow the same steps as listed below to run the benchmark.
+Install http3-curl from https:github.com/stunnel/static-curl
+and set the path of the curl binary you downloaded to the first attribute of the "curl_h3" item in ./clients.json to the path where your curl binary is placed.
 
 -----------------------------------------------------------------
 
