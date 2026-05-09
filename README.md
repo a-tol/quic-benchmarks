@@ -2,7 +2,8 @@
 
 Credit to https://github.com/triplewy/quic-benchmarks
 for their original benchmark code. This repository is a
-fork 
+fork with preset configurations to benchmark our EC2 instance,
+as well as any local servers from quic-multitest-server.
 
 use python3 -m venv [environment_directory] and place all the files
 from this repository there, then install all the required dependencies.
@@ -47,4 +48,6 @@ A static curl binary is included.
 ## Usage
 
 ```
- ./run_benchmarks.sh [dir]
+sudo ./run_benchmarks.sh
+
+Sudo permission is necessary to perform network shaping.
