@@ -5,9 +5,6 @@ for their original benchmark code. This repository is a
 fork with preset configurations to benchmark our EC2 instance,
 as well as any local servers from quic-multitest-server.
 
-use python3 -m venv [environment_directory] and place all the files
-from this repository there, then install all the required dependencies.
-
 ./run_benchmarks.sh runs the QUIC HTTP3 client various network traffic shaping conditions. Please ensure that the name of the network device specified in each file in the ./networks directory matches the one used by your local PC, specifically your network device.
 If it is different, please run
 sed -i 's/wlp2s0/[device_name]/g' *
