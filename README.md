@@ -7,7 +7,9 @@ as well as any local servers from quic-multitest-server.
 
 ./run_benchmarks.sh runs the QUIC HTTP3 client various network traffic shaping conditions. Please ensure that the name of the network device specified in each file in the ./networks directory matches the one used by your local PC, specifically your network device.
 If it is different, please run
+```
 sed -i 's/wlp2s0/[device_name]/g' *
+```
 where your network device name is specified in [device_name].
 
 Follow the same steps as listed below to run the benchmark.
@@ -50,5 +52,5 @@ A static curl binary is not included.
 
 ```
 sudo ./run_benchmarks.sh
-
+```
 Sudo permission is necessary to perform network shaping.
