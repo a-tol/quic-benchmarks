@@ -17,6 +17,9 @@ Follow the same steps as listed below to run the benchmark.
 Install http3-curl from https:github.com/stunnel/static-curl
 and set the path of the curl binary you downloaded to the first attribute of the "curl_h3" item in ./clients.json to the path where your curl binary is placed.
 
+We obtain the dataset of runtimes in ./data/runtimes.
+Please ask Meghana how she created the plots for the paper, in that regard.
+
 -----------------------------------------------------------------
 
 This repository is a set of scripts to benchmark, compare, and analyze QUIC performance, modified from Alexander Yu's QUIC benchmarking toolset in https://github.com/triplewy/quic-benchmarks, originally used for **Dissecting Performance of Production QUIC." These tools are preconfigured for usage with our Amazon EC2 instance, alongside other optional, local endpoints which are detailed in `endpoints.json`.
