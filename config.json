@@ -18,12 +18,8 @@
     "domains": {
         "description": "Domains to benchmark which are found in `endpoints.json`",
         "value": [
-            "lsquic-adaptive",
-            "lsquic-bbr",
-            "lsquic-cubic",
-            "quicly-reno",
-            "quicly-pico",
-            "quicly-cubic"
+            "h2o-notquic",
+            "openlitespeed-notquic"
         ]
     },
     "sizes": {
@@ -37,6 +33,6 @@
         ]
     },
     "clients": [
-        "curl_h3"
+        "curl_2"
     ]
 }

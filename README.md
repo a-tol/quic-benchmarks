@@ -1,65 +1,51 @@
 # QUIC Benchmarks
 
 Credit to https://github.com/triplewy/quic-benchmarks
-for the original benchmark code.
+for their original benchmark code. This repository is a
+fork 
 
 use python3 -m venv [environment_directory] and place all the files
-from this repository there, then install all the requierd dependencies.
+from this repository there, then install all the required dependencies.
+
+./run_benchmarks.sh runs the QUIC HTTP3 client various network traffic shaping conditions. Please ensure that the name of the network device specified in each file in the ./networks directory matches the one used by your local PC, specifically your network device.
+If it is different, please run
+sed -i 's/wlp2s0/[device_name]/g' *
+where your network device name is specified in [device_name].
 
 Follow the same steps as listed below to run the benchmark,
 install http3-curl from https:github.com/stunnel/static-curl
 and set the path to the client path in clients.json
 to wherever the curl binary is placed.
 
-./run_benchmarks.sh runs with various network enshittification conditions.
-Please ensure that the name of the network device sepcified in each file matches the one
-on your local PC, specifically the network device which you are using for network connections.
+-----------------------------------------------------------------
 
+This repository is a set of scripts to benchmark, compare, and analyze QUIC performance, modified from Alexander Yu's QUIC benchmarking toolset in https://github.com/triplewy/quic-benchmarks, originally used for **Dissecting Performance of Production QUIC." These tools are preconfigured for usage with our Amazon EC2 instance, alongside other optional, local endpoints which are detailed in `endpoints.json`.
 
+The general workflow for this benchmark comprises of the below steps:
 
-This repository is a set of tools to benchmark, compare, and analyze QUIC and TCP performance of production endpoints. So far, we have used this tool on endpoints from **Google**, **Facebook**, and **Cloudflare** which are detailed in `endpoints.json`.
-
-The general workflow for our benchmark comprises of the below steps:
-
-1. Use various QUIC and TCP clients to send requests to production endpoints
-2. Gather logs and metrics from these requests in various formats
-3. Create visualizations from these metrics and logs 
+1. Use a QUIC clients to send requests to "production" endpoints
+2. Gather logs and metrics from these requests via QLOG.
 
 ## Clients
 
 - QUIC (HTTP/3)
-  - Google Chrome
-  - Facebook Proxygen
-  - Ngtcp2
-- TCP (HTTP/2)
-  - Google Chrome
+  - Ngtcp2 via CURL
+- TCP, unused (HTTP/2)
   - cURL
 
-In order to use these clients, you can build them locally or use Docker images, which we automatically download with our tool.
+A static curl binary is included.
 
 ## Setup
 
 ### Building Locally
 
-1. Download and build Proxygen, Ngtcp2, and cURL clients. You do not need to build Chrome.
+1. Download and build the cURL client, or download a static cURL binary from https://github.com/stunnel/static-curl.
 2. Once you have these clients installed, modify `local.json` with their respective paths. You will notice in `local.json` that the paths are currently from my machine.
-3. For Chrome, we use Puppeteer which automatically downloads Chrome in node_modules. So you will need Node.js to run `npm install` in the `./chrome` directory.
-4. Now that you have all clients setup, you will need Python 3 to run our benchmarking script.
-5. Run `pip3 install -r requirements.txt` to download Python depedencies for our benchmarking script.
-
-### Docker (In Progress)
-
-1. You will need Python 3 to run our benchmarking script, which automatically downloads the necessary Docker images. These Docker images are described in `docker.json` 
-2. Run `pip3 install -r requirements.txt` to download Python depedencies for our benchmarking script.
-3. In `config.json`, modify the value of the `local` key to be `false`.
-
+3. So you will need Node.js to run `npm install` in the `./chrome` directory.
+4. You will need Python 3 to run the benchmarking script.
+5. Run `./bin/pip3 install -r requirements.txt` to download Python depedencie to run the benchmarking script.
 
 ## Usage
 
 ```
- ./run_benchmark.sh [dir]
-
- [dir] - Directory path to store results
-```
-
-Our benchmarking configuration is found in `config.json`. Each key in our config has a description which describes its purpose.
+ ./run_benchmarks.sh [dir]

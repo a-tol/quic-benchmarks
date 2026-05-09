@@ -14,19 +14,76 @@
         "1MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:27016/1mb.bin",
         "5MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:27016/5mb.bin"
     },
-    "quicly-reno": {
+    "quicly-reno-ecn-off-fcwindow-1.5": {
         "100KB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8444/100kb.bin",
         "1MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8444/1mb.bin",
         "5MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8444/5mb.bin"
     },    
-    "quicly-pico": {
+    "quicly-pico-ecn-off-fcwindow-1.5": {
         "100KB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8446/100kb.bin",
         "1MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8446/1mb.bin",
         "5MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8446/5mb.bin"
     },
-    "quicly-cubic": {
+    "quicly-cubic-ecn-off-fcwindow-1.5": {
         "100KB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8448/100kb.bin",
         "1MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8448/1mb.bin",
         "5MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8448/5mb.bin"
+    },
+
+    
+    "openlitespeed-notquic": {
+        "100KB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:27015/100kb.bin",
+        "1MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:27015/1mb.bin",
+        "5MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:27015/5mb.bin"
+    },
+    "h2o-notquic":{
+        "100KB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8443/100kb.bin",
+        "1MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8443/1mb.bin",
+        "5MB":"https://ec2-13-222-23-193.compute-1.amazonaws.com:8443/5mb.bin"
+    },
+    "local-lsquic-adaptive": {
+        "100KB":"https://localhost:27015/100kb.bin",
+        "1MB":"https://localhost:27015/1mb.bin",
+        "5MB":"https://localhost:27015/5mb.bin"
+    },
+    "local-lsquic-bbr": {
+        "100KB":"https://localhost:27017/100kb.bin",
+        "1MB":"https://localhost:27017/1mb.bin",
+        "5MB":"https://localhost:27017/5mb.bin"
+    },
+    "local-lsquic-cubic": {
+        "100KB":"https://localhost:27016/100kb.bin",
+        "1MB":"https://localhost:27016/1mb.bin",
+        "5MB":"https://localhost:27016/5mb.bin"
+    },
+    "local-quicly-reno": {
+        "100KB":"https://localhost:8444/100kb.bin",
+        "1MB":"https://localhost:8444/1mb.bin",
+        "5MB":"https://localhost:8444/5mb.bin"
+    },    
+    "local-quicly-pico": {
+        "100KB":"https://localhost:8446/100kb.bin",
+        "1MB":"https://localhost:8446/1mb.bin",
+        "5MB":"https://localhost:8446/5mb.bin"
+    },
+    "local-quicly-cubic": {
+        "100KB":"https://localhost:8448/100kb.bin",
+        "1MB":"https://localhost:8448/1mb.bin",
+        "5MB":"https://localhost:8448/5mb.bin"
+    },
+    "local-quicly-reno-ecn-off-fcwindow-1.5": {
+        "100KB":"https://localhost:8444/100kb.bin",
+        "1MB":"https://localhost:8444/1mb.bin",
+        "5MB":"https://localhost:8444/5mb.bin"
+    },    
+    "local-quicly-pico-ecn-off-fcwindow-1.5": {
+        "100KB":"https://localhost:8446/100kb.bin",
+        "1MB":"https://localhost:8446/1mb.bin",
+        "5MB":"https://localhost:8446/5mb.bin"
+    },
+    "local-squicly-cubic-ecn-off-fcwindow-1.5": {
+        "100KB":"https://localhost:8448/100kb.bin",
+        "1MB":"https://localhost:8448/1mb.bin",
+        "5MB":"https://localhost:8448/5mb.bin"
     }
 }
